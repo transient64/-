@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>余姚 · 我心归处 | 家乡与母校</title>
+    <style>
+        :root {
+            --primary: #8B4513;
+            --primary-light: #A0522D;
+            --gold: #C8963E;
+            --cream: #FFF8F0;
+            --dark: #2C2416;
+            --text: #3D3226;
+            --text-light: #6B5D4F;
+            --white: #FFFFFF;
+            --bg-warm: #FDF6EE;
+            --card-bg: #FFFFFF;
+            --shadow-sm: 0 2px 12px rgba(44, 36, 22, 0.06);
+            --shadow-md: 0 6px 28px rgba(44, 36, 22, 0.10);
+            --shadow-lg: 0 14px 48px rgba(44, 36, 22, 0.13);
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: "PingFang SC", "Noto Serif SC", "Source Han Serif CN", "STSong", "SimSun", "KaiTi", "楷体", Georgia, "Times New Roman", serif;
+            background-color: var(--cream);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============ 顶部导航栏 ============ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 248, 240, 0.72);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(139, 69, 19, 0.10);
+            transition: var(--transition);
+            padding: 0 2rem;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 248, 240, 0.94);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .navbar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .nav-logo {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.06em;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .nav-logo .icon {
+            width: 34px;
+            height: 34px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.25rem;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.95rem;
+            padding: 0.55rem 1.1rem;
+            border-radius: 24px;
+            transition: var(--transition);
+            letter-spacing: 0.03em;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .nav-links a:hover {
+            background: rgba(139, 69, 19, 0.08);
+            color: var(--primary);
+        }
+        .nav-links a.btn-nav {
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            padding: 0.55rem 1.4rem;
+        }
+        .nav-links a.btn-nav:hover {
+            background: var(--primary-light);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        /* 移动端菜单 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+            background: none;
+            border: none;
+        }
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ============ Hero 区 ============ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(175deg, #FDF6EE 0%, #F8EDDE 30%, #F3E2CC 60%, #EDD8B8 100%);
+            overflow: hidden;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .hero-bg-pattern {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.25;
+            background:
+                radial-gradient(ellipse at 25% 30%, #C8963E 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 65%, #8B4513 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, #D4A85C 0%, transparent 45%);
+            animation: heroGlow 12s ease-in-out infinite;
+        }
+        @keyframes heroGlow {
+            0%,
+            100% {
+                opacity: 0.22;
+            }
+            50% {
+                opacity: 0.35;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 750px;
+        }
+        .hero-tag {
+            display: inline-block;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            color: var(--primary);
+            border: 1px solid rgba(139, 69, 19, 0.3);
+            border-radius: 30px;
+            padding: 0.4rem 1.4rem;
+            margin-bottom: 1.6rem;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(6px);
+        }
+        .hero h1 {
+            font-size: clamp(3rem, 6.5vw, 5rem);
+            font-weight: 900;
+            color: var(--dark);
+            letter-spacing: 0.08em;
+            line-height: 1.15;
+            margin-bottom: 0.5rem;
+        }
+        .hero h1 .highlight {
+            color: var(--primary);
+            position: relative;
+        }
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: rgba(200, 150, 62, 0.3);
+            border-radius: 4px;
+            z-index: -1;
+        }
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            margin-bottom: 2.4rem;
+            letter-spacing: 0.05em;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.7;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 2.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            transition: var(--transition);
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: var(--shadow-md);
+        }
+        .btn-primary:hover {
+            background: var(--primary-light);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-outline:hover {
+            background: rgba(139, 69, 19, 0.06);
+            transform: translateY(-2px);
+        }
+
+        /* 滚动指示器 */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            animation: bounce 2.2s ease-in-out infinite;
+            cursor: pointer;
+            color: var(--text-light);
+            font-size: 0.78rem;
+            letter-spacing: 0.06em;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+        .scroll-indicator .arrow {
+            width: 28px;
+            height: 28px;
+            border-right: 2px solid var(--primary);
+            border-bottom: 2px solid var(--primary);
+            transform: rotate(45deg);
+            opacity: 0.7;
+        }
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(14px);
+            }
+        }
+
+        /* ============ 通用区块 ============ */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        .section-label {
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-size: 0.82rem;
+            letter-spacing: 0.14em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.8rem;
+        }
+        .section-desc {
+            color: var(--text-light);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+        .divider {
+            width: 50px;
+            height: 3px;
+            background: var(--gold);
+            margin: 1rem auto;
+            border-radius: 3px;
+            opacity: 0.7;
+        }
+
+        /* ============ 余姚介绍 - 卡片网格 ============ */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: default;
+            border: 1px solid rgba(139, 69, 19, 0.06);
+        }
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-6px);
+        }
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            background: linear-gradient(135deg, #e8d5c4, #d4b896);
+            position: relative;
+        }
+        .card-img-placeholder {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: #fff;
+            position: relative;
+        }
+        .card-img-1 {
+            background: linear-gradient(150deg, #a0845c 0%, #c4a87a 40%, #8b6914 100%);
+        }
+        .card-img-2 {
+            background: linear-gradient(150deg, #5c7a6e 0%, #7a9e8a 40%, #4a6b5a 100%);
+        }
+        .card-img-3 {
+            background: linear-gradient(150deg, #8b5e3c 0%, #b8845c 40%, #6b3a1f 100%);
+        }
+        .card-img-4 {
+            background: linear-gradient(150deg, #6b4c3b 0%, #9b7b6a 40%, #4a3028 100%);
+        }
+        .card-body {
+            padding: 1.6rem 1.5rem 1.8rem;
+        }
+        .card-body h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.04em;
+        }
+        .card-body p {
+            color: var(--text-light);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+        .card-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            background: rgba(200, 150, 62, 0.12);
+            color: var(--gold);
+            padding: 0.25rem 0.8rem;
+            border-radius: 20px;
+            margin-bottom: 0.7rem;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+
+        /* ============ 母校区块 ============ */
+        .alma-mater-section {
+            background: linear-gradient(180deg, #FFF8F0 0%, #FDF3E7 40%, #FFF8F0 100%);
+            border-top: 1px solid rgba(139, 69, 19, 0.08);
+            border-bottom: 1px solid rgba(139, 69, 19, 0.08);
+        }
+
+        .school-hero {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            flex-wrap: wrap;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(139, 69, 19, 0.06);
+        }
+        .school-emblem {
+            flex-shrink: 0;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #8B4513, #A0522D);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: #fff;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            font-weight: bold;
+            letter-spacing: 0.04em;
+        }
+        .school-emblem::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px dashed rgba(139, 69, 19, 0.25);
+            animation: spin 20s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .school-info {
+            flex: 1;
+            min-width: 250px;
+        }
+        .school-info .label {
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .school-info h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        .school-info .motto {
+            font-style: italic;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.06em;
+            font-weight: 500;
+        }
+        .school-info p {
+            color: var(--text-light);
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.75;
+        }
+
+        .school-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        .detail-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 1.6rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(139, 69, 19, 0.05);
+        }
+        .detail-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+        .detail-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.6rem;
+        }
+        .detail-card h4 {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.35rem;
+            letter-spacing: 0.04em;
+        }
+        .detail-card p {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+        }
+
+        /* ============ 名人名言区块 ============ */
+        .quote-block {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2.8rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            margin-top: 3rem;
+            border-left: 5px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+        .quote-block::before {
+            content: '"';
+            position: absolute;
+            top: -30px;
+            left: 30px;
+            font-size: 10rem;
+            color: rgba(200, 150, 62, 0.07);
+            font-family: Georgia, serif;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .quote-block .quote-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--dark);
+            letter-spacing: 0.04em;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        .quote-block .quote-author {
+            margin-top: 1rem;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: 0.06em;
+        }
+
+        /* ============ 页脚 ============ */
+        .footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.75);
+            text-align: center;
+            padding: 2.5rem 2rem;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            line-height: 2;
+        }
+        .footer strong {
+            color: var(--gold);
+            font-weight: 700;
+        }
+        .footer .heart {
+            color: #e85d5d;
+            animation: heartbeat 1.2s ease-in-out infinite;
+            display: inline-block;
+        }
+        @keyframes heartbeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.25);
+            }
+            50% {
+                transform: scale(1);
+            }
+            75% {
+                transform: scale(1.25);
+            }
+        }
+
+        /* ============ 响应式 ============ */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+            .navbar-inner {
+                height: 56px;
+            }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 260px;
+                height: 100vh;
+                background: rgba(255, 248, 240, 0.97);
+                backdrop-filter: blur(30px);
+                -webkit-backdrop-filter: blur(30px);
+                flex-direction: column;
+                padding: 5rem 1.5rem 2rem;
+                gap: 0.6rem;
+                transition: var(--transition);
+                box-shadow: -8px 0 30px rgba(0, 0, 0, 0.1);
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links a {
+                font-size: 1rem;
+                padding: 0.7rem 1rem;
+                display: block;
+                text-align: center;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            .hero {
+                padding: 5rem 1.2rem 3rem;
+                min-height: 90vh;
+            }
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            .section {
+                padding: 3rem 1.2rem;
+            }
+            .school-hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .school-details {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .school-details {
+                grid-template-columns: 1fr;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 导航栏 ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <a href="#" class="nav-logo">
+                <span class="icon">姚</span> 我的家乡
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#yuyao">走进余姚</a></li>
+                <li><a href="#school">我的母校</a></li>
+                <li><a href="#footer-info" class="btn-nav">关于</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="菜单">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== Hero 主视觉 ==================== -->
+    <section class="hero" id="home">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-content">
+            <span class="hero-tag">📍 浙江 · 宁波 · 余姚</span>
+            <h1>
+                东南名邑<br>
+                <span class="highlight">文献名邦</span> 余姚
+            </h1>
+            <p class="hero-subtitle">
+                河姆渡文明发源地 · 王阳明故里<br>
+                四明山水滋养千年文脉，一方水土育一方人
+            </p>
+            <div class="hero-buttons">
+                <a href="#yuyao" class="btn btn-primary">探索家乡</a>
+                <a href="#school" class="btn btn-outline">走进母校</a>
+            </div>
+        </div>
+        <div class="scroll-indicator" onclick="document.getElementById('yuyao').scrollIntoView({behavior:'smooth'})">
+            <span>向下探索</span>
+            <div class="arrow"></div>
+        </div>
+    </section>
+
+    <!-- ==================== 余姚介绍 ==================== -->
+    <section class="section" id="yuyao">
+        <div class="section-header">
+            <p class="section-label">My Hometown</p>
+            <h2 class="section-title">🏘️ 千年余姚，山水之间</h2>
+            <div class="divider"></div>
+            <p class="section-desc">
+                余姚地处浙东宁绍平原，秦时置县，历史悠久，文化灿烂，
+                素有"文献名邦""东南名邑"之美誉。
+            </p>
+        </div>
+        <div class="cards-grid">
+            <!-- 卡片1：河姆渡 -->
+            <div class="card">
+                <img class="card-img" src="images/hemudu.png" alt="河姆渡遗址">             
+                <div class="card-body">
+                    <span class="card-tag">七千年文明</span>
+                    <h3>河姆渡遗址</h3>
+                    <p>中国南方早期新石器时代遗址，距今约7000年，证明了长江流域同样是中华文明的摇篮。出土的稻谷、干栏式建筑震撼世界。</p>
+                </div>
+            </div>
+            <!-- 卡片2：王阳明 -->
+            <div class="card">
+               <img class="card-img" src="images/yangminggujv.png" alt="王阳明故居">             
+                <div class="card-body">
+                    <span class="card-tag">心学圣地</span>
+                    <h3>王阳明故居</h3>
+                    <p>明代大儒王守仁（阳明先生）诞生于此，"知行合一"思想影响深远。故居瑞云楼保存完好，是全国重点文物保护单位。</p>
+                </div>
+            </div>
+            <!-- 卡片3：四明山 -->
+            <div class="card">
+                <img class="card-img" src="images/simingshan.jpg" alt="四明山国家森林公园">
+                <div class="card-body">
+                    <span class="card-tag">天然氧吧</span>
+                    <h3>四明山国家森林公园</h3>
+                    <p>浙东名山，林深茂密，青山碧水，有"第二庐山"之称。春赏樱花、夏避酷暑、秋观红枫、冬览雾凇，四季皆美。</p>
+                </div>
+            </div>
+            <!-- 卡片4：美食 -->
+            <div class="card">
+                <img class="card-img" src="images/meishi.jpeg" alt="地方风味美食">
+                <div class="card-body">
+                    <span class="card-tag">舌尖余姚</span>
+                    <h3>地方风味美食</h3>
+                    <p>余姚杨梅名扬天下，酸甜多汁；余姚榨菜脆嫩爽口，远销海外；还有梁弄大糕、陆埠豆酥糖等传统糕点，承载乡愁滋味。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 名人名言 -->
+        <div class="quote-block">
+            <p class="quote-text">"吾心自有光明月，千古团圆永无缺。"</p>
+            <p class="quote-author">—— 王阳明（余姚先贤）</p>
+        </div>
+    </section>
+
+    <!-- ==================== 母校介绍 ==================== -->
+    <div class="alma-mater-section" id="school">
+        <section class="section">
+            <div class="section-header">
+                <p class="section-label">My Alma Mater</p>
+                <h2 class="section-title">🎓 浙江省余姚中学</h2>
+                <div class="divider"></div>
+                <p class="section-desc">
+                    梦想启航的地方，青春最美的注脚。
+                </p>
+            </div>
+
+            <!-- 学校主卡片 -->
+            <div class="school-hero">
+                <img class="school-emblem" src="images/xiaohui.png" alt="余姚中学校徽">
+                <div class="school-info">
+                    <p class="label">浙江省一级重点中学</p>
+                    <h2>浙江省余姚中学</h2>
+                    <p class="motto">「 知行合一 · 止于至善 」</p>
+                    <p>
+                        创建于1939年，坐落在历史文化名城余姚市区，
+                        是浙江省首批一级重点中学、浙江省现代化学校。
+                        学校秉承阳明先生"知行合一"精神，培养了一代又一代优秀学子，
+                        桃李满天下，声誉传四方。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 详细数据卡片 -->
+            <div class="school-details">
+                <div class="detail-card">
+                    <div class="detail-icon">📅</div>
+                    <h4>建校时间</h4>
+                    <p>1939年<br>迄今80余载辉煌</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">🏫</div>
+                    <h4>学校类型</h4>
+                    <p>浙江省一级重点中学<br>浙江省现代化学校</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">🌳</div>
+                    <h4>校园环境</h4>
+                    <p>绿树成荫，书香满园<br>现代化教学设施完备</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">🏆</div>
+                    <h4>办学成果</h4>
+                    <p>高考成绩斐然<br>学科竞赛屡获殊荣</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">👨‍🏫</div>
+                    <h4>师资力量</h4>
+                    <p>名师荟萃<br>敬业奉献的教师团队</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">🎉</div>
+                    <h4>校园文化</h4>
+                    <p>社团丰富多元<br>注重学生全面发展</p>
+                </div>
+            </div>
+
+            <!-- 母校情怀语 -->
+            <div class="quote-block" style="margin-top: 3rem;">
+                <p class="quote-text">知行合一，止于至善</p>
+                <p class="quote-author">—— 余姚中学校训</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== 页脚 ==================== -->
+    <footer class="footer" id="footer-info">
+        <p>
+            <strong>余姚</strong> —— 我心归处，此生挚爱的家乡
+        </p>
+        <p>
+            我的母校 <strong>浙江省余姚中学</strong>
+        </p>
+        <p style="margin-top:0.5rem; font-size:0.82rem; opacity:0.7;">
+            河姆渡之光 · 阳明心学之源 · 四明山水之秀
+        </p>
+    </footer>
+
+    <!-- ==================== 脚本 ==================== -->
+    <script>
+        // 导航栏滚动阴影
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // 点击菜单链接后自动关闭
+        const linkItems = navLinks.querySelectorAll('a');
+        linkItems.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // 点击页面其他区域关闭菜单
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // 滚动渐显动画 (简易版)
+        const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .detail-card, .school-hero, .quote-block').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+            observer.observe(el);
+        });
+
+        // 初始触发一次可见元素
+        setTimeout(() => {
+            document.querySelectorAll('.card, .detail-card, .school-hero, .quote-block').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        }, 200);
+    </script>
+</body>
+</html>
